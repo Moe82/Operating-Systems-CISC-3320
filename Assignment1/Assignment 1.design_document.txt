@@ -1,0 +1,35 @@
+﻿Author: Mohamed Shafee
+Design Document 
+
+
+Abstract
+
+
+I decided to solve this assignment with an OOP approach by creating a class to represent a pid manager. A pid manager has a minimum pid number (300), a maximum pid number (5000), and an array to keep track of which pid numbers have been allocated. A pid manager can initialize the array, allocate pid id’s, and release pid Id’s.
+
+
+API
+
+
+__init__(self)
+
+
+Constructor to initialize a PidManager object. Accepts no parameters and sets the __MIN_PID to 300 and __Max__PID to 5000. Both values are private and can not be accessed or modified outside of the class. 
+
+
+allocate_list(self)
+
+
+Initializes the data structure to keep track of allocated id’s. Catches an exception error and returns a value of -1 if this process was unsuccessful and returns a value of 1 if it was successful. The data structure I decided to use is a simple Python list with 5000-300 elements all initialized to a value of 0. 
+
+
+allocate_id(self):
+
+
+Allocates an id from 300-5000 (in order) by setting the element at the corresponding index (equal to the pid’s id number minus 300) to 1. Returns -1 if the list is full (IndexError) and returns the pid’ id number if it was allocated successfully. If the list was not initialized by calling the allocate_list() function, an AttributeError is caught and allocate_list() is called then allocate_id() is called a second time. 
+
+
+release_pid(self, pid_id):
+
+
+Releases a pid by setting the element at the corresponding index (equal to the pid_id minus 300) to 1. Returns -1 if pid_id is outside of the range of possible pid numbers (IndexError) and returns 1 if the call was successful.
