@@ -17,13 +17,13 @@ def execute(pid_manager):
   ----------
   None
   """
-  int = random.uniform(0, 10) # a random number of seconds to sleep.  
-  sleep(int)
+  secs_to_sleep = round(random.uniform(0, 10),3) # a random number of seconds to sleep.  
+  sleep(secs_to_sleep)
   pid = pid_manager.allocate_id() # request a pid.
-  print("worker #{} started. sleeping for {} seconds.".format(pid, int))
-  sleep(int)
+  print("worker #{} started. sleeping for {} seconds.".format(pid, secs_to_sleep))
+  sleep(secs_to_sleep)
   pid_manager.release_pid(pid) # release the pid.
-  print("worker #{} died".format(pid))
+  print("worker #{} died.".format(pid))
 
 def start():
   pid_manager = PidManager() # create an instance of the PidManager class.
