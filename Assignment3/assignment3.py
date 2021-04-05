@@ -17,9 +17,9 @@ def race_condition():
   boolean: true if duplicates found, otherwise, false. 
   """
   if len(allocated_pids) != len(set(allocated_pids)):
-    return true
+    return True
   else:
-    return false
+    return False
 
 def execute(pid_manager):
   """
