@@ -8,12 +8,18 @@ pid_allocation_mutex = Lock()
 pid_deallocation_mutex = Lock()
 allocated_pids = [] # a list of pids currently allocated 
 
-def check_race_condition():
+def race_condition():
   """
   Checks for a race condition by looking for duplicates in the allocated_pids array.
+  
+  Returns
+  ----------
+  boolean: true if duplicates found, otherwise, false. 
   """
   if len(allocated_pids) != len(set(allocated_pids)):
-      print("RACE CONDITION")
+    return true
+  else:
+    return false
 
 def execute(pid_manager):
   """
@@ -38,7 +44,8 @@ def execute(pid_manager):
   finally:
     pid_allocation_mutex.release()
   
-  check_race_condition()
+  if race_condition():
+    print("RACE CONDITON")
 
   print("worker #{} started. sleeping for {} seconds.".format(pid, secs_to_sleep))
   sleep(secs_to_sleep)
