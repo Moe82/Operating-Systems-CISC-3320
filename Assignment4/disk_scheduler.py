@@ -41,7 +41,7 @@ class DiskScheduler:
 
 
 if __name__ == "__main__":
-    disk_scheduler = DiskScheduler()
-    disk_scheduler.parse_input()
-    disk_scheduler.service_request()
-    disk_scheduler.print()
+  disk_scheduler = DiskScheduler()
+  disk_scheduler.parse_input()
+  disk_scheduler.service_request()
+  disk_scheduler.print()
