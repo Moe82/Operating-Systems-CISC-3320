@@ -6,14 +6,13 @@ class DiskScheduler:
 		self.algorithm = ""
 		self.initial_position = ""
 		self.direction = ""
-		self.parse_input()
 
 	def parse_input(self):
 		# parses the cmd line arguments 
 		args = sys.argv
-		self.algorithm = args.pop().rstrip(',')
-		self.initial_position = args.pop().rstrip(',')
 		self.direction = args.pop().rstrip(',')
+		self.initial_position = args.pop().rstrip(',')
+		self.algorithm = args.pop().rstrip(',')
 		for a in args[1:]:
 			for part in a.split(","):
 				if part.strip():
@@ -21,3 +20,4 @@ class DiskScheduler:
 
 if __name__ == "__main__":
     disk_scheduler = DiskScheduler()
+    disk_scheduler.parse_input()
