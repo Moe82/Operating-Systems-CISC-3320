@@ -44,6 +44,38 @@ class DiskScheduler:
         self.num_head_movements += (self.requests[index_of_current_head + 1] - self.requests[index_of_current_head])
         del self.requests[index_of_current_head]
 
+  def LOOK(self):
+    self.requests.append(self.initial_position)
+    self.requests.sort()
+    index_of_current_head = self.requests.index(self.initial_position)
+    while len(self.requests) != 1:
+      if self.direction == "left":
+        if index_of_current_head == 0:
+          self.direction = "right"
+        else:
+          self.num_head_movements += (self.requests[index_of_current_head] - self.requests[index_of_current_head - 1])
+          del self.requests[index_of_current_head]
+          index_of_current_head -= 1
+      if self.direction == "right":
+        if index_of_current_head == len(self.requests) - 1:
+          self.direction = "left"
+        else:
+          self.num_head_movements += (self.requests[index_of_current_head + 1] - self.requests[index_of_current_head])
+          del self.requests[index_of_current_head]
+  
+  def CLOOK(self):
+    self.requests.append(self.initial_position)
+    self.requests.sort()
+    index_of_current_head = self.requests.index(self.initial_position)
+    while len(self.requests) > 1:
+      if (index_of_current_head == len(self.requests) - 1):
+        self.num_head_movements += (self.requests[index_of_current_head] - self.requests[0])
+        index_of_current_head = 0
+        del self.requests[len(self.requests) - 1]
+      else :
+        self.num_head_movements += (self.requests[index_of_current_head + 1] - self.requests[index_of_current_head])
+        del self.requests[index_of_current_head]
+  
   def print(self):
     print(self.algorithm.__name__ + ": " + str(self.num_head_movements))
 
@@ -52,4 +84,3 @@ if __name__ == "__main__":
   disk_scheduler.parse_input()
   disk_scheduler.service_request()
   disk_scheduler.print()
- 
