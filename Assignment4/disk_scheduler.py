@@ -48,7 +48,30 @@ class DiskScheduler:
       current_head = request_with_min_seek
       self.requests.remove(request_with_min_seek)
       min_seek = float('inf')
-
+    
+  def SCAN(self):
+    self.requests.append(self.initial_position)
+    if self.direction == "left":
+      self.requests.append(0)
+    elif self.direction == "right":
+      self.requests.append(4999)
+    self.requests.sort()
+    index_of_current_head = self.requests.index(self.initial_position)
+    while len(self.requests) != 1:
+      if self.direction == "left":
+        if index_of_current_head == 0:
+          self.direction = "right"
+        else:
+          self.num_head_movements += (self.requests[index_of_current_head] - self.requests[index_of_current_head - 1])
+          del self.requests[index_of_current_head]
+          index_of_current_head -= 1
+      if self.direction == "right":
+        if index_of_current_head == len(self.requests) - 1:
+          self.direction = "left"
+        else:
+          self.num_head_movements += (self.requests[index_of_current_head + 1] - self.requests[index_of_current_head])
+          del self.requests[index_of_current_head]
+         
   def print(self):
     print(self.num_head_movements)
 
