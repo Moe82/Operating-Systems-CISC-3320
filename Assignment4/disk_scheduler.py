@@ -23,8 +23,8 @@ class DiskScheduler:
   def service_request(self):
 		# calls the function with the same name as self.algorithm
     try:
-      algorithm = getattr(self, self.algorithm)
-      algorithm()
+      self.algorithm = getattr(self, self.algorithm)
+      self.algorithm()
     except AttributeError:
       print(self.algorithm + " is not a valid algorithm.")
       sys.exit()
@@ -74,7 +74,7 @@ class DiskScheduler:
           del self.requests[index_of_current_head]
          
   def print(self):
-    print(self.num_head_movements)
+    print(self.algorithm.__name__ + ": " + str(self.num_head_movements))
 
 if __name__ == "__main__":
   disk_scheduler = DiskScheduler()
