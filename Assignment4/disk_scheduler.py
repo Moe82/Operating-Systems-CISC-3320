@@ -7,6 +7,7 @@ class DiskScheduler:
     self.initial_position = ""
     self.direction = ""
     self.num_head_movements = 0
+    self.MAX_CYLINDERS = 4999
 
   def parse_input(self):
     # parses the cmd line arguments 
@@ -54,7 +55,7 @@ class DiskScheduler:
     if self.direction == "left":
       self.requests.append(0)
     elif self.direction == "right":
-      self.requests.append(4999)
+      self.requests.append(self.MAX_CYLINDERS)
     self.requests.sort()
     index_of_current_head = self.requests.index(self.initial_position)
     while len(self.requests) != 1:
